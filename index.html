@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)file:///C:/Users/BOSS/Downloads/dvd-services_1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DVD — Monthly Content Packages</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --off-black: #111111;
+    --panel: #161616;
+    --border: #242424;
+    --white: #f0ede8;
+    --dim: #666666;
+    --accent: #e8d5b0;
+    --accent-dim: rgba(232,213,176,0.12);
+    --red: #c94040;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* GLITCH HEADER */
+  .header {
+    position: relative;
+    padding: 56px 48px 40px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.012) 2px,
+      rgba(255,255,255,0.012) 4px
+    );
+    pointer-events: none;
+  }
+
+  .wordmark {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .wordmark::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+
+  .header-title {
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    max-width: 620px;
+  }
+
+  .header-title em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .header-sub {
+    margin-top: 20px;
+    font-size: 15px;
+    color: var(--dim);
+    max-width: 480px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* SCANLINE ACCENT — the signature element */
+  .scanline-bar {
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, transparent 60%);
+    margin: 40px 0 0;
+    opacity: 0.6;
+  }
+
+  /* MAIN LAYOUT */
+  .main {
+    padding: 0 48px 64px;
+  }
+
+  /* PACKAGES */
+  .packages {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 48px;
+    border: 1px solid var(--border);
+  }
+
+  .package {
+    background: var(--panel);
+    padding: 36px 32px;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .package:hover {
+    background: #1a1a1a;
+  }
+
+  .package.featured {
+    background: var(--off-black);
+  }
+
+  .package.featured::before {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: -1px;
+    left: 32px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--black);
+    background: var(--accent);
+    padding: 4px 10px;
+    font-weight: 700;
+  }
+
+  .pkg-tier {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .pkg-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+
+  .pkg-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin: 20px 0 4px;
+  }
+
+  .pkg-cadence {
+    font-size: 12px;
+    color: var(--dim);
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 24px;
+  }
+
+  .pkg-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pkg-items li {
+    font-size: 14px;
+    color: #aaaaaa;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.4;
+    font-weight: 300;
+  }
+
+  .pkg-items li::before {
+    content: '—';
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    opacity: 0.7;
+  }
+
+  .pkg-items li strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* HOW IT WORKS */
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin: 56px 0 24px;
+  }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .how-step {
+    background: var(--panel);
+    padding: 28px 24px;
+  }
+
+  .step-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    opacity: 0.6;
+    margin-bottom: 12px;
+  }
+
+  .step-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .step-body {
+    font-size: 13px;
+    color: var(--dim);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* FINE PRINT */
+  .fine-print {
+    margin-top: 48px;
+    padding: 28px 32px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+  }
+
+  .fine-print p {
+    font-size: 13px;
+    color: var(--dim);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .fine-print p + p {
+    margin-top: 8px;
+  }
+
+  .fine-print strong {
+    color: #888;
+    font-weight: 500;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-handle {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .footer-note {
+    font-size: 12px;
+    color: var(--dim);
+    font-weight: 300;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .header { padding: 40px 24px 32px; }
+    .main { padding: 0 24px 48px; }
+    .packages { grid-template-columns: 1fr; }
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .footer { flex-direction: column; gap: 12px; align-items: flex-start; }
+  }
+
+  @media (max-width: 560px) {
+    .how-grid { grid-template-columns: 1fr; }
+    .pkg-price { font-size: 30px; }
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .package, .how-step, .fine-print { border: 1px solid #ddd !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="wordmark">@dvdtheproducer</div>
+  <h1 class="header-title">Ready-to-post content.<br><em>Every month.</em></h1>
+  <p class="header-sub">AI-produced video ads and product imagery — delivered to you. You post it, you own it.</p>
+  <div class="scanline-bar"></div>
+</header>
+
+<main class="main">
+
+  <div class="packages">
+
+    <!-- STARTER -->
+    <div class="package">
+      <div class="pkg-tier">Starter</div>
+      <div class="pkg-name">Drop</div>
+      <div class="pkg-price">$350</div>
+      <div class="pkg-cadence">per month</div>
+      <div class="divider"></div>
+      <ul class="pkg-items">
+        <li><strong>1 video ad</strong> — 10–15 sec, vertical</li>
+        <li><strong>5 product images</strong> — ready to post</li>
+        <li>1 round of revisions</li>
+        <li>Delivered within 5 business days</li>
+      </ul>
+    </div>
+
+    <!-- CORE / FEATURED -->
+    <div class="package featured">
+      <div class="pkg-tier">Core</div>
+      <div class="pkg-name">Monthly Kit</div>
+      <div class="pkg-price">$600</div>
+      <div class="pkg-cadence">per month</div>
+      <div class="divider"></div>
+      <ul class="pkg-items">
+        <li><strong>2 video ads</strong> — 10–15 sec, vertical</li>
+        <li><strong>10 product images</strong> — ready to post</li>
+        <li>2 rounds of revisions</li>
+        <li>Delivered within 5 business days</li>
+        <li>48-hr turnaround on revision requests</li>
+      </ul>
+    </div>
+
+    <!-- PRO -->
+    <div class="package">
+      <div class="pkg-tier">Pro</div>
+      <div class="pkg-name">Full Slate</div>
+      <div class="pkg-price">$1,100</div>
+      <div class="pkg-cadence">per month</div>
+      <div class="divider"></div>
+      <ul class="pkg-items">
+        <li><strong>4 video ads</strong> — mixed formats &amp; hooks</li>
+        <li><strong>20 product images</strong> — ready to post</li>
+        <li>Unlimited revisions</li>
+        <li>Priority delivery</li>
+        <li>Ad creative variations on request</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section-label">How it works</div>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="step-num">01</div>
+      <div class="step-title">You brief me</div>
+      <div class="step-body">Send your product details, any existing assets, and any creative direction you have in mind.</div>
+    </div>
+    <div class="how-step">
+      <div class="step-num">02</div>
+      <div class="step-title">I produce it</div>
+      <div class="step-body">I handle everything — concept, generation, editing. No back-and-forth during production.</div>
+    </div>
+    <div class="how-step">
+      <div class="step-num">03</div>
+      <div class="step-title">You review</div>
+      <div class="step-body">I send a delivery folder with all files. You request revisions within your allotted rounds.</div>
+    </div>
+    <div class="how-step">
+      <div class="step-num">04</div>
+      <div class="step-title">You post it</div>
+      <div class="step-body">Files are yours. Post when and where you want — I don't manage your accounts.</div>
+    </div>
+  </div>
+
+  <!-- FINE PRINT -->
+  <div class="fine-print">
+    <p><strong>What's included:</strong> All deliverables are formatted for vertical social (9:16). Video ads are edited and export-ready. Images are high-resolution. You receive full usage rights upon payment.</p>
+    <p><strong>What's not included:</strong> Caption writing, account management, posting, paid ad setup, or strategy calls. Content is produced using AI-assisted tools and creative direction from @dvdtheproducer.</p>
+    <p><strong>Billing:</strong> Monthly retainer, billed at the start of each cycle. First month requires a 50% deposit to begin.</p>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-handle">@dvdtheproducer</div>
+    <div class="footer-note">Reach out to discuss which package fits your brand.</div>
+  </footer>
+
+</main>
+
+
+
+</body></html>
